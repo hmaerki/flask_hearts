@@ -49,7 +49,7 @@ def get_from_list_in_range(start, end, alist):
 
 
 def start_game():
-    big_set = range(1, 53)
+    big_set = list(range(1, 53))
     for i in range(4):
         player_set = random.sample(big_set, 13)
         for value in player_set:
@@ -115,7 +115,7 @@ def get_cards_to_play(start_player, current_type):
 
 def get_averages_of_cards(cards):
     result = {}
-    for _type, values in cards.iteritems():
+    for _type, values in cards.items():
         if len(values) == 0:
             continue
         elif 1 in values:
@@ -155,7 +155,7 @@ def evaluate_cards():
     global player_current_cards
     valid_cards_mapping = {}
     hearts_count = 0
-    for player, item in player_current_cards.iteritems():
+    for player, item in player_current_cards.items():
         if item['type'] == 'hearts':
             hearts_count += 1
         if item['type'] == current_type:
@@ -173,7 +173,7 @@ def evaluate_cards():
 def check_if_game_over():
     global players
     # import pdb; pdb.set_trace()
-    for _type, values in players['3'].iteritems():
+    for _type, values in players['3'].items():
         if len(values) != 0:
             return False
     return True
@@ -189,10 +189,11 @@ def play_game():
     if hasattr(request, 'form'):
         data = request.form
     # import pdb; pdb.set_trace()
-    if len(data.values()) == 0 or data is None:
+    values = list(data.values())
+    if len(values) == 0 or data is None:
         start_game()
         current_type = 'clubs'
-        print players
+        print(players)
         if first_player != '3':
             get_cards_to_play(first_player, current_type)
     elif 'card' in data:
@@ -230,7 +231,7 @@ def play_game():
         game_winner = keys[values.index(min(values))]
         log_message = "Game over with winner %s" % game_winner
 
-    print player_current_cards
+    print(player_current_cards)
     return render_template(
         'main.html',
         player_current_cards=player_current_cards,

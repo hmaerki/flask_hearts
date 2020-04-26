@@ -23,7 +23,7 @@
 
       <table>
         <tr>
-  {% for item in user_player.iteritems() %}
+  {% for item in user_player.items() %}
     {% for card in item[1] %}
         <td>
       {% if card == 11 %}
@@ -75,7 +75,7 @@
 
   <table>
     <tr>
-  {% for player_item in player_current_cards.iteritems() %}
+  {% for player_item in player_current_cards.items() %}
     <td>
     <p><b>{{ player_item[0] }} ( {{ players_score[player_item[0]] }} )</b></p>
     {% if 'card' in player_item[1] %}
